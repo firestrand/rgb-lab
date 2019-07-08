@@ -2,7 +2,7 @@
 // found on www.easyrgb.com
 
 function lab2rgb(lab){
-  var y = (lab[0] + 16) / 116,
+  let y = (lab[0] + 16) / 116,
       x = lab[1] / 500 + y,
       z = y - lab[2] / 200,
       r, g, b;
@@ -26,7 +26,7 @@ function lab2rgb(lab){
 
 
 function rgb2lab(rgb){
-  var r = rgb[0] / 255,
+  let r = rgb[0] / 255,
       g = rgb[1] / 255,
       b = rgb[2] / 255,
       x, y, z;
@@ -50,20 +50,20 @@ function rgb2lab(rgb){
 // https://github.com/THEjoezack/ColorMine/blob/master/ColorMine/ColorSpaces/Comparisons/Cie94Comparison.cs
 
 function deltaE(labA, labB){
-  var deltaL = labA[0] - labB[0];
-  var deltaA = labA[1] - labB[1];
-  var deltaB = labA[2] - labB[2];
-  var c1 = Math.sqrt(labA[1] * labA[1] + labA[2] * labA[2]);
-  var c2 = Math.sqrt(labB[1] * labB[1] + labB[2] * labB[2]);
-  var deltaC = c1 - c2;
-  var deltaH = deltaA * deltaA + deltaB * deltaB - deltaC * deltaC;
+  const deltaL = labA[0] - labB[0];
+  const deltaA = labA[1] - labB[1];
+  const deltaB = labA[2] - labB[2];
+  const c1 = Math.sqrt(labA[1] * labA[1] + labA[2] * labA[2]);
+  const c2 = Math.sqrt(labB[1] * labB[1] + labB[2] * labB[2]);
+  const deltaC = c1 - c2;
+  let deltaH = deltaA * deltaA + deltaB * deltaB - deltaC * deltaC;
   deltaH = deltaH < 0 ? 0 : Math.sqrt(deltaH);
-  var sc = 1.0 + 0.045 * c1;
-  var sh = 1.0 + 0.015 * c1;
-  var deltaLKlsl = deltaL / (1.0);
-  var deltaCkcsc = deltaC / (sc);
-  var deltaHkhsh = deltaH / (sh);
-  var i = deltaLKlsl * deltaLKlsl + deltaCkcsc * deltaCkcsc + deltaHkhsh * deltaHkhsh;
+  const sc = 1.0 + 0.045 * c1;
+  const sh = 1.0 + 0.015 * c1;
+  const deltaLKlsl = deltaL / (1.0);
+  const deltaCkcsc = deltaC / (sc);
+  const deltaHkhsh = deltaH / (sh);
+  const i = deltaLKlsl * deltaLKlsl + deltaCkcsc * deltaCkcsc + deltaHkhsh * deltaHkhsh;
   return i < 0 ? 0 : Math.sqrt(i);
 }
 
